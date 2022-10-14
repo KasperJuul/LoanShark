@@ -1,0 +1,76 @@
+:root {
+    --primary-color: #1D5888;
+    --secondary-color: #FF993B;
+    --dark-color: #292929;
+    --light-color: #fafafa;
+}
+
+body {
+    color: var(--dark-color);
+}
+
+nav {
+    background-color: var(--dark-color);
+}
+
+footer {
+    background-color: var(--dark-color);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--primary-color);
+}
+
+main>.container {
+    padding: 60px 15px 0;
+    margin-bottom: 5rem;
+}
+
+footer {
+    padding-right: 1rem;
+}
+
+footer .social>a {
+    color: var(--light-color);
+
+}
+
+footer .social>a:hover {
+    opacity: 0.9;
+    color: var(--secondary-color);
+}
+
+.bsicon {
+    color: #602C50;
+}
+
+.jsicon{
+    color: #F0DB4F;
+}
+
+.html5icon {
+    color: #E34C26;
+}
+
+.cssicon {
+    color: #3C99DC;
+}
+
+.checklist >li i{
+    color: var(--secondary-color);
+}
+
+code[class*="language-"],
+pre[class*="language-"] 
+{
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.sticky-footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

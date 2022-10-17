@@ -58,13 +58,13 @@
                     <div class="border border-2 border-light p-2 bg-light">
                         <form action="#">
                             <label class="form-label">Loan Amount:</label>
-                            <input type="number" name="LoanAmount" class="form-control" placeholder="15000" aria-label="Loan Amount" required>
+                            <input id="loanAmount" type="number" name="LoanAmount" class="form-control" placeholder="15000" value="15000" aria-label="Loan Amount" required>
                             <label class="form-label">Payments:</label>
-                            <input type="number" name="LoanAmount" class="form-control" placeholder="60" aria-label="Payments" required>
+                            <input id="months" type="number" name="Payments" class="form-control" placeholder="60" value="60" aria-label="Payments" required>
                             <label class="form-label">Interest Rate:</label>
-                            <input type="number" name="LoanAmount" class="form-control" placeholder="3" aria-label="Payments" required>
+                            <input id="rate" type="rate" name="InterestRate" class="form-control" placeholder="3" value="3" aria-label="Payments" required>
                             <div class ="col-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-outline-info mt-2">Calculate</button>
+                                <button id="calculate" type="button" class="btn btn-outline-info mt-2">Calculate</button>
                             </div>
                         </form>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="col">
                             Total Principal
                         </div>
-                        <div class="col d-flex justify-content-end">
+                        <div id="totalPrincipal" class="col d-flex justify-content-end">
                             $15,000.00
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         <div class="col">
                             Total Interest
                         </div>
-                        <div class="col d-flex justify-content-end">
+                        <div id="totalInterest" class="col d-flex justify-content-end">
                             $1,171.82
                         </div>
                     </div>
@@ -96,16 +96,27 @@
                         <div class="col">
                             Total Cost
                         </div>
-                        <div class="col d-flex justify-content-end">
+                        <div id="totalCost" class="col d-flex justify-content-end">
                             $16,171.82
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
             <div class="table-responsive">
                 <table class="table table-striped">
-
+                    <thead class="text-light bg-dark">
+                        <tr>
+                            <td>Month</td>
+                            <td>Payment</td>
+                            <td>Principal</td>
+                            <td>Interest</td>
+                            <td>Total Interest</td>
+                            <td>Balance</td>
+                        </tr>
+                    </thead>
+                    <tbody id="results">
+                        
+                    </tbody>
                 </table>
             </div>
        </div>
@@ -131,11 +142,25 @@
         </div>
     </footer>
 
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
     </script>
     <script src="js/site.js"></script>
+    <script>
+        document.getElementById("calculate").addEventListener("click", getValues);
+    </script>
 </body>
 
 </html>

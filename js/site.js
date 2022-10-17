@@ -3,15 +3,15 @@ function getValues() {
     let loanAmount = document.getElementById("loanAmount").value;
     let months = document.getElementById("months").value;
     let rate = document.getElementById("rate").value;
-    let reslults = [];
+    let loanData = {};
 
     loanAmount = parseFloat(loanAmount);
     months = parseInt(months);
     rate = parseInt(rate);
 
-    reslults = calculateLoan(loanAmount,months,rate);
+    loanData = calculateLoan(loanAmount,months,rate);
     
-    displayData(reslults);
+    displayData(loanData);
 
 }
 
@@ -21,7 +21,8 @@ function calculateLoan(loanAmount, months, rate) {
     let balance = loanAmount;
     let totalInterest = 0;
     
-    let reslults = [];
+    let monthSchedule = [];
+    let loanData = {};
 
     for (let i = 0; i < months; i++) {
         let returnObj = {};
@@ -35,10 +36,16 @@ function calculateLoan(loanAmount, months, rate) {
         returnObj.principal = principal.toFixed(2);
         returnObj.totalInterest = totalInterest.toFixed(2);
         returnObj.balance = Math.round(balance.toFixed(2) * 100) / 100;
-        reslults.push(returnObj);
+        monthSchedule.push(returnObj);
     }
 
-    return reslults;
+    loanData.monthlyPayments = totalMonthlyPayment.toFixed(2);
+    loanData.totalPrincipal = loanAmount.toFixed(2);
+    loanData.totalInterest = totalInterest.toFixed(2);
+    loanData.totalCost = (loanAmount + totalInterest).toFixed(2);
+    loanData.monthSchedule = monthSchedule;
+
+    return loanData;
 }
 
 // Display the loan data in the table rows
@@ -51,19 +58,23 @@ function displayData(loanData){
     // clear the table
     tableBody.innerHTML = "";
     
-    for (let i = 0; i < loanData.length; i++) {
+    for (let i = 0; i < loanData.monthSchedule.length; i++) {
         
         let tableRow = document.importNode(templateRow.content,true);
 
         let rowCols = tableRow.querySelectorAll("td");
         rowCols[0].textContent = i + 1;
-        rowCols[1].textContent = loanData[i].payment;
-        rowCols[2].textContent = loanData[i].principal;
-        rowCols[3].textContent = loanData[i].interest;
-        rowCols[4].textContent = loanData[i].totalInterest;
-        rowCols[5].textContent = loanData[i].balance;
+        rowCols[1].textContent = loanData.monthSchedule[i].payment;
+        rowCols[2].textContent = loanData.monthSchedule[i].principal;
+        rowCols[3].textContent = loanData.monthSchedule[i].interest;
+        rowCols[4].textContent = loanData.monthSchedule[i].totalInterest;
+        rowCols[5].textContent = loanData.monthSchedule[i].balance;
         
         tableBody.appendChild(tableRow);
     }
 
+    document.getElementById("monthlyPayments").innerHTML = '$' + loanData.monthlyPayments;
+    document.getElementById("totalPrincipal").innerHTML = '$' + loanData.totalPrincipal;
+    document.getElementById("totalInterest").innerHTML = '$' + loanData.totalInterest;
+    document.getElementById("totalCost").innerHTML = '$' + loanData.totalCost;
 }
